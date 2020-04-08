@@ -27,9 +27,12 @@ db.bash:
 
 up: 
 	$(COMPOSE) up -d
-
 down:
 	$(COMPOSE) down
+rm:
+	$(COMPOSE) rm
+hard-restart:
+	make down && make rm && make up
 
 ssh:
 	$(SSH)
