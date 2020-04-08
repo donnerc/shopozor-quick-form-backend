@@ -1,0 +1,20 @@
+query listBasketContent($id: Int!){
+  baskets(where: {id: {_eq: $id}}) {
+    type  {
+      price	
+      name
+    }
+    basketLines {
+      product {
+        name
+        id
+        description
+      }
+    }
+  }
+}
+
+# Example variables: 
+# {
+#   "id": 15
+# }

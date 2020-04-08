@@ -1,0 +1,23 @@
+mutation {
+  insert_basket_types(objects: [
+    {
+      name: "Petit"
+      price: "30"
+    },
+    {
+      name: "Moyen"
+      price: "60"
+    },
+    {
+      name: "Grand"
+      price: "90"
+    },
+  ]) {
+    affected_rows
+    returning {
+      id
+      name
+      price
+    }
+  }
+}

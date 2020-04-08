@@ -1,0 +1,6 @@
+- args:
+    relationship: type
+    table:
+      name: basket_types
+      schema: public
+  type: drop_relationship

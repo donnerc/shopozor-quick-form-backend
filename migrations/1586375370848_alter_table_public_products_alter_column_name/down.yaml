@@ -1,0 +1,10 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: ALTER TABLE "public"."products" ALTER COLUMN "name" TYPE character varying;
+  type: run_sql
+- args:
+    cascade: false
+    read_only: false
+    sql: ALTER TABLE "public"."products" DROP CONSTRAINT "products_name_key";
+  type: run_sql

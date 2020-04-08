@@ -1,0 +1,12 @@
+- args:
+    name: type
+    table:
+      name: basket_types
+      schema: public
+    using:
+      foreign_key_constraint_on:
+        column: type_id
+        table:
+          name: baskets
+          schema: public
+  type: create_array_relationship

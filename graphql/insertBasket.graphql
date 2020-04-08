@@ -1,0 +1,33 @@
+mutation createBasket($products: jsonb) {
+  insert_json_baskets_one(object: {
+    type_id: 3,
+    products: $products
+  }) {
+    created_at
+    id
+    products
+    type {
+      name
+      id
+    }
+  }
+}
+
+# example variables
+# {
+#   "products": [
+#     {
+#       "name": "Pommes",
+#       "quantity": "1kg"
+#     },
+#     {
+#       "name": "2 Bouteilles de 500ml d'huile de caméline"
+#     },
+#     {
+#       "name": "Fenouils"
+#     },
+#     {
+#       "name": "1 paque de graines de tourneslo"
+#     }
+#   ]
+# }

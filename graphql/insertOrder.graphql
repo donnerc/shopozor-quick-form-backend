@@ -1,0 +1,36 @@
+mutation createOrder(
+  $basketId: Int!
+  $city: String!
+  $zip: bpchar!
+  $phone: String!
+  $street: String!
+  $firstName: String!
+  $lastName: String!
+  $email: String!
+  $needPepper: Boolean!
+  $needSalt: Boolean!
+) {
+  insert_orders_one(
+    object: {
+      basket_id: $basketId
+      city: $city
+      email: $email
+      firstName: $firstName
+      lastName: $lastName
+      needPepper: $needPepper
+      needSalt: $needSalt
+      zip: $zip
+      street: $street
+      phone: $phone
+    }
+  ) {
+    id
+    needSalt
+    needPepper
+    firstName
+    lastName
+    email
+    phone
+    created_at
+  }
+}

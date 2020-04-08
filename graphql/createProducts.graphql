@@ -1,0 +1,10 @@
+mutation createProduct {
+  insert_products(objects: [{name: "Pommes"}, {name: "Poires"}, {name: "Tomates"}]) {
+    affected_rows
+    returning {
+      name
+      id
+    }
+  }
+}
+

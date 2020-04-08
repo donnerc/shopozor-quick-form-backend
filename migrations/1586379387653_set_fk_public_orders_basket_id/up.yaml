@@ -1,0 +1,10 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: |-
+      alter table "public"."orders"
+                 add constraint "orders_basket_id_fkey"
+                 foreign key ("basket_id")
+                 references "public"."json_baskets"
+                 ("id") on update restrict on delete restrict;
+  type: run_sql

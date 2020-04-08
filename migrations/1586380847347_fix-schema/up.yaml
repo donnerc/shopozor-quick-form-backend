@@ -1,0 +1,53 @@
+- args:
+    tables:
+    - object_relationships:
+      - name: basket
+        using:
+          foreign_key_constraint_on: basket_id
+      - name: product
+        using:
+          foreign_key_constraint_on: product_id
+      table:
+        name: basket_lines
+        schema: public
+    - table:
+        name: basket_types
+        schema: public
+    - array_relationships:
+      - name: basketLines
+        using:
+          foreign_key_constraint_on:
+            column: basket_id
+            table:
+              name: basket_lines
+              schema: public
+      object_relationships:
+      - name: type
+        using:
+          foreign_key_constraint_on: type_id
+      table:
+        name: baskets
+        schema: public
+    - object_relationships:
+      - name: type
+        using:
+          foreign_key_constraint_on: type_id
+      table:
+        name: json_baskets
+        schema: public
+    - table:
+        name: orders
+        schema: public
+    - array_relationships:
+      - name: basket_lines
+        using:
+          foreign_key_constraint_on:
+            column: product_id
+            table:
+              name: basket_lines
+              schema: public
+      table:
+        name: products
+        schema: public
+    version: 2
+  type: replace_metadata
