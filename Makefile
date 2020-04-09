@@ -4,6 +4,8 @@ HASURA_CONTAINER = $(shell docker ps -qf "name=graphql-engine")
 DB_CONTAINER = $(shell docker ps -qf "name=postgres")
 
 PG_DUMP = $(EXEC) $(DB_CONTAINER) pg_dump -d postgres -U postgres
+PG_RESTORE = $(EXEC) $(DB_CONTAINER) pg_restore -d $(POSTGRES_DB) -U $(POSTGRES_USER) 
+
 
 PGADMIN_LOCAL_PORT = 8400
 
@@ -31,10 +33,8 @@ pg-container:
 
 db.dump:
 	@$(PG_DUMP)
-
 db.dump.public.data:
-	@$(PG_DUMP) --data-only --schema=public
-	
+	@$(PG_DUMP) --data-only --schema=public	
 
 db.bash:
 	$(EXEC)  $(DB_CONTAINER) sh 
