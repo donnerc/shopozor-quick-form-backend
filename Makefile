@@ -8,9 +8,13 @@ PG_DUMP = $(EXEC) $(DB_CONTAINER) pg_dump -d postgres -U postgres
 PGADMIN_LOCAL_PORT = 8400
 
 
-SSH_OPTIONS = 63748-3210@gate.hidora.com -p 3022
+SSH_OPTIONS = $(JELASTIC_NODE_ID)-$(JELASTIC_USER_ID)@$(JELASTIC_SSH_HOST)
 SSH = ssh $(SSH_OPTIONS)
 SSH_TUNNEL = $(SSH) -N -L 
+
+
+OPEN = explorer.exe
+PORTAINER_REMOTE_URL=https://node63748-shopozor-quick-form.hidora.com:11134/
 
 env:
 	@echo 'set -a; source .env set +a' | clip.exe
@@ -43,4 +47,9 @@ ssh:
 	$(SSH)
 
 pgadmin.ssh-tunnel:
-	$(SSH_TUNNEL) $(PGADMIN_LOCAL_PORT):localhost:$(PGADMIN_PORT)
+	@echo tunneling localhost:$(PGADMIN_LOCAL_PORT) to remote port $(PGADMIN_PORT)
+	$(SSH_TUNNEL) $(PGADMIN_LOCAL_PORT):localhost:$(PGADMIN_PORT) &
+tunnels: pgadmin.ssh-tunnel
+
+open.portainer:
+	$(OPEN) $(PORTAINER_REMOTE_URL)
