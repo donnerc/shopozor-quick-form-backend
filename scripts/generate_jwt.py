@@ -1,9 +1,11 @@
 import jwt
 import datetime
+import time
 import sys
 import os
+import json
 
-secret_key = os.getenv('AUTH_SECRET_KEY')
+secret_key = os.getenv('HASURA_GRAPHQL_JWT_SECRET_KEY')
 print('using secret key', secret_key)
 
 payload = {
@@ -11,7 +13,7 @@ payload = {
     "admin": False,
     "iat": datetime.datetime.utcnow(),
     "exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=2 * 365 * 24 * 3600),
-    "https://budzonnerie.ch/jwt/claims": {
+    "https://hasura.io/jwt/claims": {
         "x-hasura-allowed-roles": [
             "consumer"
         ],
@@ -20,6 +22,7 @@ payload = {
         "x-hasura-org-id": "1"
     }
 }
-encoded_jwt = jwt.encode(payload, secret_key, algorithm='RS256')
+
+encoded_jwt = jwt.encode(payload, secret_key, algorithm='HS256')
 
 print(encoded_jwt.decode(encoding='utf-8'))

@@ -1,0 +1,26 @@
+- args:
+    permission:
+      allow_upsert: true
+      check: {}
+      columns:
+      - basket_id
+      - city
+      - comments
+      - email
+      - firstName
+      - id
+      - lastName
+      - needPepper
+      - needSalt
+      - phone
+      - street
+      - zip
+      localPresets:
+      - key: ""
+        value: ""
+      set: {}
+    role: consumer
+    table:
+      name: orders
+      schema: public
+  type: create_insert_permission

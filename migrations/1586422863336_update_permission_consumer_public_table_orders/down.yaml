@@ -1,0 +1,6 @@
+- args:
+    role: consumer
+    table:
+      name: orders
+      schema: public
+  type: drop_insert_permission

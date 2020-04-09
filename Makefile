@@ -18,6 +18,8 @@ PORTAINER_REMOTE_URL=https://node63748-shopozor-quick-form.hidora.com:11134/
 HASURA_CLI=hasura --admin-secret=$(HASURA_GRAPHQL_ADMIN_SECRET)
 HASURA_REMOTE_CLI=$(HASURA_CLI) --endpoint=https://$(HOST) 
 
+REMOTE_GRAPHQL_ENDPOINT=https://$(HOST)/v1/graphql
+
 env:
 	@echo 'set -a; source .env set +a' | clip.exe
 env.%:
@@ -55,6 +57,12 @@ tunnels: pgadmin.ssh-tunnel
 
 open.portainer:
 	$(OPEN) $(PORTAINER_REMOTE_URL)
+open.pgadmin:
+	$(OPEN) http://localhost:$(PGADMIN_LOCAL_PORT)
+open.graphql-engine:
+	$(OPEN) https://$(HOST)
+clip.graphql-endpoint:
+	@echo $(REMOTE_GRAPHQL_ENDPOINT)
 
 
 alias.init:

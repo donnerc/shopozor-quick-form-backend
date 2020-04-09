@@ -1,0 +1,17 @@
+- args:
+    permission:
+      allow_aggregations: true
+      columns:
+      - id
+      - created_at
+      - updated_at
+      - products
+      - type_id
+      computed_fields: []
+      filter: {}
+      limit: null
+    role: consumer
+    table:
+      name: json_baskets
+      schema: public
+  type: create_select_permission

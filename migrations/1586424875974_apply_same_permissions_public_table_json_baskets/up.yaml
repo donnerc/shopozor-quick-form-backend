@@ -1,0 +1,94 @@
+- args:
+    role: consumer
+    table:
+      name: baskets
+      schema: public
+  type: drop_select_permission
+- args:
+    permission:
+      allow_aggregations: true
+      columns: []
+      computed_fields: []
+      filter: {}
+      set: {}
+    role: consumer
+    table:
+      name: baskets
+      schema: public
+  type: create_select_permission
+- args:
+    role: consumer
+    table:
+      name: basket_types
+      schema: public
+  type: drop_select_permission
+- args:
+    permission:
+      allow_aggregations: true
+      columns: []
+      computed_fields: []
+      filter: {}
+      set: {}
+    role: consumer
+    table:
+      name: basket_types
+      schema: public
+  type: create_select_permission
+- args:
+    role: consumer
+    table:
+      name: basket_lines
+      schema: public
+  type: drop_select_permission
+- args:
+    permission:
+      allow_aggregations: true
+      columns: []
+      computed_fields: []
+      filter: {}
+      set: {}
+    role: consumer
+    table:
+      name: basket_lines
+      schema: public
+  type: create_select_permission
+- args:
+    role: consumer
+    table:
+      name: products
+      schema: public
+  type: drop_select_permission
+- args:
+    permission:
+      allow_aggregations: true
+      columns: []
+      computed_fields: []
+      filter: {}
+      set: {}
+    role: consumer
+    table:
+      name: products
+      schema: public
+  type: create_select_permission
+- args:
+    role: consumer
+    table:
+      name: json_baskets
+      schema: public
+  type: drop_select_permission
+- args:
+    permission:
+      allow_aggregations: true
+      columns:
+      - id
+      - created_at
+      - updated_at
+      - products
+      - type_id
+      computed_fields: []
+      filter: {}
+    role: consumer
+    table:
+      name: json_baskets
+      schema: public
+  type: create_select_permission
