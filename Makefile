@@ -12,9 +12,11 @@ SSH_OPTIONS = $(JELASTIC_NODE_ID)-$(JELASTIC_USER_ID)@$(JELASTIC_SSH_HOST)
 SSH = ssh $(SSH_OPTIONS)
 SSH_TUNNEL = $(SSH) -N -L 
 
-
 OPEN = explorer.exe
 PORTAINER_REMOTE_URL=https://node63748-shopozor-quick-form.hidora.com:11134/
+
+HASURA_CLI=hasura --admin-secret=$(HASURA_GRAPHQL_ADMIN_SECRET)
+HASURA_REMOTE_CLI=$(HASURA_CLI) --endpoint=https://$(HOST) 
 
 env:
 	@echo 'set -a; source .env set +a' | clip.exe
@@ -53,3 +55,17 @@ tunnels: pgadmin.ssh-tunnel
 
 open.portainer:
 	$(OPEN) $(PORTAINER_REMOTE_URL)
+
+
+alias.init:
+	@echo alias hasura.remote="'$(HASURA_REMOTE_CLI)'" > .bash_aliases
+	@echo alias hasura.local="'$(HASURA_CLI)'" >> .bash_aliases
+
+alias.load:
+	echo "source .bash_aliases" | clip.exe
+hasura.switch.local:
+hasura.switch.remote:
+hasura.switch.%:
+	echo "alias hasura='hasura.$*'" | clip.exe
+hasura.restore:
+	echo "alias hasura='hasura'" | clip.exe
