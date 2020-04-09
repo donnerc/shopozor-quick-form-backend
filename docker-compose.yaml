@@ -1,16 +1,33 @@
 version: '3.6'
 services:
   postgres:
-    env_file:
-      - .env
+    env_file: .env
     image: postgres:12
     restart: always
     volumes:
       - db_data:/var/lib/postgresql/data
 
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: always
+    links:
+      - postgres
+    ports:
+      - "8300:80"
+    depends_on:
+      - "postgres"
+    env_file: .env
+    environment:
+      PGADMIN_LISTEN_PORT: "80"
+      PGADMIN_DEFAULT_EMAIL: "cedonner@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_PASSWORD}"
+    volumes:
+      - ./pgadmin/servers.json:/servers.json
+    
+    
+
   graphql-engine:
-    env_file:
-      - .env
+    env_file: .env
     image: hasura/graphql-engine:v1.2.0-beta.3
     ports:
     - "${HASURA_GRAPHQL_PORT}:8080"
@@ -21,6 +38,7 @@ services:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       ## uncomment next line to set an admin secret
+      HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "${HASURA_GRAPHQL_JWT_SECRET_KEY}" }'
 volumes:
   db_data:
 
