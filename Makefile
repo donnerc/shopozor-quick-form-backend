@@ -5,7 +5,12 @@ DB_CONTAINER = $(shell docker ps -qf "name=postgres")
 
 PG_DUMP = $(EXEC) $(DB_CONTAINER) pg_dump -d postgres -U postgres
 
-SSH = ssh 63748-3210@gate.hidora.com -p 3022
+PGADMIN_LOCAL_PORT = 8400
+
+
+SSH_OPTIONS = 63748-3210@gate.hidora.com -p 3022
+SSH = ssh $(SSH_OPTIONS)
+SSH_TUNNEL = $(SSH) -N -L 
 
 env:
 	@echo 'set -a; source .env set +a' | clip.exe
@@ -36,3 +41,6 @@ hard-restart:
 
 ssh:
 	$(SSH)
+
+pgadmin.ssh-tunnel:
+	$(SSH_TUNNEL) $(PGADMIN_LOCAL_PORT):localhost:$(PGADMIN_PORT)
