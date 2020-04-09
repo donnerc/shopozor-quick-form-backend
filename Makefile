@@ -62,7 +62,7 @@ open.pgadmin:
 open.graphql-engine:
 	$(OPEN) https://$(HOST)
 clip.graphql-endpoint:
-	@echo $(REMOTE_GRAPHQL_ENDPOINT)
+	@echo $(REMOTE_GRAPHQL_ENDPOINT) | clip.exe
 
 
 alias.init:
@@ -77,3 +77,8 @@ hasura.switch.%:
 	echo "alias hasura='hasura.$*'" | clip.exe
 hasura.restore:
 	echo "alias hasura='hasura'" | clip.exe
+
+jwt.generate:
+	pipenv run python scripts/generate_jwt.py 1 
+clip.jwt.generate:
+	@pipenv run python scripts/generate_jwt.py 1  | clip.exe

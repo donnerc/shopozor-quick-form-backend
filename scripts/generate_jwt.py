@@ -6,7 +6,6 @@ import os
 import json
 
 secret_key = os.getenv('HASURA_GRAPHQL_JWT_SECRET_KEY')
-print('using secret key', secret_key)
 
 payload = {
     "sub": "1234567890",
@@ -25,4 +24,4 @@ payload = {
 
 encoded_jwt = jwt.encode(payload, secret_key, algorithm='HS256')
 
-print(encoded_jwt.decode(encoding='utf-8'))
+print(encoded_jwt.decode(encoding='utf-8'), end="")
