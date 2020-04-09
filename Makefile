@@ -12,6 +12,7 @@ SSH_OPTIONS = $(JELASTIC_NODE_ID)-$(JELASTIC_USER_ID)@$(JELASTIC_SSH_HOST)
 SSH = ssh $(SSH_OPTIONS)
 SSH_TUNNEL = $(SSH) -N -L 
 
+CLIP = clip.exe
 OPEN = explorer.exe
 PORTAINER_REMOTE_URL=https://node63748-shopozor-quick-form.hidora.com:11134/
 
@@ -21,9 +22,9 @@ HASURA_REMOTE_CLI=$(HASURA_CLI) --endpoint=https://$(HOST)
 REMOTE_GRAPHQL_ENDPOINT=https://$(HOST)/v1/graphql
 
 env:
-	@echo 'set -a; source .env set +a' | clip.exe
+	@echo 'set -a; source .env set +a' | $(CLIP)
 env.%:
-	@echo 'set -a; source .env.$* set +a' | clip.exe
+	@echo 'set -a; source .env.$* set +a' | $(CLIP)
 
 pg-container:
 	echo $(PG_CONTAINER)
@@ -44,8 +45,6 @@ down:
 	$(COMPOSE) down
 rm:
 	$(COMPOSE) rm
-hard-restart:
-	make down && make rm && make up
 
 ssh:
 	$(SSH)
@@ -61,8 +60,8 @@ open.pgadmin:
 	$(OPEN) http://localhost:$(PGADMIN_LOCAL_PORT)
 open.graphql-engine:
 	$(OPEN) https://$(HOST)
-clip.graphql-endpoint:
-	@echo $(REMOTE_GRAPHQL_ENDPOINT) | clip.exe
+copy.graphql-endpoint:
+	@echo $(REMOTE_GRAPHQL_ENDPOINT) | $(CLIP)
 
 
 alias.init:
@@ -70,15 +69,16 @@ alias.init:
 	@echo alias hasura.local="'$(HASURA_CLI)'" >> .bash_aliases
 
 alias.load:
-	echo "source .bash_aliases" | clip.exe
+	echo "source .bash_aliases" | $(CLIP)
 hasura.switch.local:
 hasura.switch.remote:
 hasura.switch.%:
-	echo "alias hasura='hasura.$*'" | clip.exe
+	echo "alias hasura='hasura.$*'" | $(CLIP)
 hasura.restore:
-	echo "alias hasura='hasura'" | clip.exe
+	echo "alias hasura='hasura'" | $(CLIP)
 
 jwt.generate:
 	pipenv run python scripts/generate_jwt.py 1 
-clip.jwt.generate:
-	@pipenv run python scripts/generate_jwt.py 1  | clip.exe
+copy.jwt.generate:
+	@pipenv run python scripts/generate_jwt.py 1  | $(CLIP)
+
