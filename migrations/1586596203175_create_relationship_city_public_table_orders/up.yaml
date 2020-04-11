@@ -1,0 +1,13 @@
+- args:
+    name: city
+    table:
+      name: orders
+      schema: public
+    using:
+      manual_configuration:
+        column_mapping:
+          city_name: name
+        remote_table:
+          name: cities
+          schema: public
+  type: create_object_relationship

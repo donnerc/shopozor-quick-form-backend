@@ -1,0 +1,9 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: |-
+      CREATE DOMAIN zip_code AS TEXT
+      CHECK(
+         VALUE ~ '^\d{4}$'
+      );
+  type: run_sql

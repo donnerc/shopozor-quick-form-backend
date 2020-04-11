@@ -1,0 +1,9 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: |-
+      CREATE DOMAIN swiss_phone AS TEXT
+      CHECK(
+         VALUE ~ '^((\+?41)|0)(\s?)(\-?)(\d{2})(\s?)(\-?)(\d{3})((\s?)(\-?)(\d{2})){2}$'
+      );
+  type: run_sql

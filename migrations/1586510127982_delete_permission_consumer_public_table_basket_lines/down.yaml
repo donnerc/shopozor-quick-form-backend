@@ -1,0 +1,14 @@
+- args:
+    permission:
+      allow_aggregations: true
+      columns:
+      - product_id
+      - basket_id
+      - quantity
+      computed_fields: []
+      filter: {}
+    role: consumer
+    table:
+      name: basket_lines
+      schema: public
+  type: create_select_permission

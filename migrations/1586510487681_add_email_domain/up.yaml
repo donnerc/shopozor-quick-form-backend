@@ -1,0 +1,9 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: |-
+      CREATE DOMAIN domain_email AS TEXT
+      CHECK(
+         VALUE ~ '^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$'
+      );
+  type: run_sql

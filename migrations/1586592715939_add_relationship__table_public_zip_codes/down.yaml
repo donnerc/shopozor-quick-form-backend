@@ -1,0 +1,6 @@
+- args:
+    relationship: city
+    table:
+      name: zip_codes
+      schema: public
+  type: drop_relationship

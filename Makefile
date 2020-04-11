@@ -3,9 +3,11 @@ EXEC = docker exec -it
 HASURA_CONTAINER = $(shell docker ps -qf "name=graphql-engine")
 DB_CONTAINER = $(shell docker ps -qf "name=postgres")
 
-PG_DUMP = $(EXEC) $(DB_CONTAINER) pg_dump -d postgres -U postgres
-PG_RESTORE = $(EXEC) $(DB_CONTAINER) pg_restore -d $(POSTGRES_DB) -U $(POSTGRES_USER) 
 
+# Postgres utilities
+PG_DUMP = $(EXEC) $(DB_CONTAINER) pg_dump -d $(POSTGRES_DB) -U $(POSTGRES_USER) 
+PG_RESTORE = $(EXEC) $(DB_CONTAINER) pg_restore -d $(POSTGRES_DB) -U $(POSTGRES_USER) 
+PSQL = $(EXEC) $(DB_CONTAINER) psql -d $(POSTGRES_DB) -U $(POSTGRES_USER) 
 
 PGADMIN_LOCAL_PORT = 8400
 
@@ -67,6 +69,7 @@ copy.graphql-endpoint:
 alias.init:
 	@echo alias hasura.remote="'$(HASURA_REMOTE_CLI)'" > .bash_aliases
 	@echo alias hasura.local="'$(HASURA_CLI)'" >> .bash_aliases
+	@echo alias db.dump="'docker exec $(docker ps -qf "name=postgres") pg_dump -d $(POSTGRES_DB) -U $(POSTGRES_USER) --data --schema=public'" >> .bash_aliases
 
 alias.load:
 	echo "source .bash_aliases" | $(CLIP)

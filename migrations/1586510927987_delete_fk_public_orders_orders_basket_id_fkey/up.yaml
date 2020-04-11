@@ -1,0 +1,5 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: alter table "public"."orders" drop constraint "orders_basket_id_fkey";
+  type: run_sql

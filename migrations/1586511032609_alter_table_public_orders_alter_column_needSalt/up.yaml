@@ -1,0 +1,10 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: ALTER TABLE "public"."orders" ALTER COLUMN "needSalt" TYPE bool;
+  type: run_sql
+- args:
+    cascade: false
+    read_only: false
+    sql: ALTER TABLE ONLY "public"."orders" ALTER COLUMN "needSalt" SET DEFAULT False;
+  type: run_sql

@@ -1,0 +1,12 @@
+- args:
+    name: zip_codes
+    table:
+      name: cities
+      schema: public
+    using:
+      foreign_key_constraint_on:
+        column: city_id
+        table:
+          name: zip_codes
+          schema: public
+  type: create_array_relationship

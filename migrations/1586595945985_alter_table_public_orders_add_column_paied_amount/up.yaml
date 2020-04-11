@@ -1,0 +1,6 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: ALTER TABLE "public"."orders" ADD COLUMN "paied_amount" numeric NULL DEFAULT
+      0;
+  type: run_sql

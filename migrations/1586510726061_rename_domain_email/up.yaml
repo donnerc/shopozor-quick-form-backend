@@ -1,0 +1,7 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: |-
+      ALTER DOMAIN domain_email
+          RENAME TO email;
+  type: run_sql

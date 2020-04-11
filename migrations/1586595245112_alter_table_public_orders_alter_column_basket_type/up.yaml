@@ -1,0 +1,5 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: alter table "public"."orders" rename column "basket_type" to "basket_type_name";
+  type: run_sql

@@ -1,0 +1,6 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: alter table "public"."orders" add constraint "basket_type" check (basket_type
+      ~ '^(Petit)|(Moyen)|(Grand)$');
+  type: run_sql

@@ -1,0 +1,6 @@
+- args:
+    relationship: city
+    table:
+      name: orders
+      schema: public
+  type: drop_relationship

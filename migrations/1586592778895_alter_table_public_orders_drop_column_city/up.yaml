@@ -1,0 +1,5 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: ALTER TABLE "public"."orders" DROP COLUMN "city" CASCADE;
+  type: run_sql
